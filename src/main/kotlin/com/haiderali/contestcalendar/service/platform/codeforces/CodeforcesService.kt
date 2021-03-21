@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 class CodeforcesService : CodingPlatformService {
 
     override fun fetchContests(): List<Contest> {
-        val url = "http://codeforces.com/api/contest.list"
+        val url = "https://codeforces.com/api/contest.list"
         val responseJson = url
             .httpGet()
             .header(Headers.USER_AGENT to "coding-calendar", Headers.ACCEPT to "application/json")
@@ -25,7 +25,7 @@ class CodeforcesService : CodingPlatformService {
 
     private fun getContestFromCodeforcesContest(codeforcesContest: CodeforcesContest) = Contest(
         name = codeforcesContest.name,
-        url = codeforcesContest.websiteUrl ?: "http://codeforces.com/contests/${codeforcesContest.id}",
+        url = codeforcesContest.websiteUrl ?: "https://codeforces.com/contests/${codeforcesContest.id}",
         platform = Platform.CODEFORCES,
         startTime = getLocalDateTimeFromEpochSeconds(codeforcesContest.startTimeSeconds),
         endTime = getLocalDateTimeFromEpochSeconds(codeforcesContest.startTimeSeconds + codeforcesContest.durationSeconds)

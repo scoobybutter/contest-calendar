@@ -33,7 +33,7 @@ class TopcoderService : CodingPlatformService {
 
     private fun getContestFromTopcoderContest(topcoderContest: TopcoderContest) = Contest(
         name = topcoderContest.summary!!,
-        url = "http://topcoder.com/challenges",
+        url = "https://topcoder.com/challenges",
         platform = Platform.TOPCODER,
         startTime = DateTimeUtil.getLocalDateTimeFromStringWithZone(
             topcoderContest.start!!.dateTime!!, "yyyy-MM-dd'T'HH:mm:ssz"
