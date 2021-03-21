@@ -1,7 +1,6 @@
 package com.haiderali.contestcalendar.service
 
 import com.haiderali.contestcalendar.business.RefDataManager
-import com.haiderali.contestcalendar.domain.Contest
 import com.haiderali.contestcalendar.service.platform.CodingPlatformService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -16,18 +15,12 @@ class ContestService(
     private val codingPlatformServices: List<CodingPlatformService>
 ) {
 
-    fun getOpenContests(cached: Boolean): List<Contest> {
-        val contests = getAllContests(cached)
-        return contests.filter {
-            LocalDateTime.now(ZoneOffset.UTC) >= it.startTime && LocalDateTime.now(ZoneOffset.UTC) <= it.endTime
-        }
+    fun getOpenContests(cached: Boolean) = getAllContests(cached).filter {
+        LocalDateTime.now(ZoneOffset.UTC) >= it.startTime && LocalDateTime.now(ZoneOffset.UTC) <= it.endTime
     }
 
-    fun getUpcomingContests(cached: Boolean): List<Contest> {
-        val contests = getAllContests(cached)
-        return contests.filter {
-            it.startTime > LocalDateTime.now(ZoneOffset.UTC)
-        }
+    fun getUpcomingContests(cached: Boolean) = getAllContests(cached).filter {
+        it.startTime > LocalDateTime.now(ZoneOffset.UTC)
     }
 
     private fun getAllContests(cached: Boolean) = if (cached) {
